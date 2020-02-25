@@ -25,7 +25,7 @@ COPY --from=builder /go/src/github.com/ipedrazas/drone-helm/drone-helm /bin/
 
 # Helm version: can be passed at build time
 ARG VERSION
-ENV VERSION ${VERSION:-v2.14.1}
+ENV VERSION ${VERSION:-v2.13.1}
 ENV FILENAME helm-${VERSION}-linux-amd64.tar.gz
 
 ARG KUBECTL
@@ -47,5 +47,6 @@ RUN set -ex \
 LABEL description="Kubectl and Helm."
 LABEL base="alpine"
 COPY kubeconfig /root/.kube/kubeconfig
+
 
 ENTRYPOINT [ "/bin/drone-helm" ]

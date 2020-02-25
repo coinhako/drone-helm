@@ -83,6 +83,11 @@ func main() {
 			Usage:  "Helm values override files",
 			EnvVar: "PLUGIN_VALUES_FILES,VALUES_FILES",
 		},
+		cli.StringFlag{
+			Name:   "set_files",
+			Usage:  "Helm values override set-files",
+			EnvVar: "PLUGIN_SET_FILES,SET_FILES",
+		},
 		cli.BoolFlag{
 			Name:   "skip_tls_verify",
 			Usage:  "Skip TLS verification",
@@ -186,6 +191,7 @@ func run(c *cli.Context) error {
 			Values:             c.String("values"),
 			StringValues:       c.String("string_values"),
 			ValuesFiles:        c.String("values_files"),
+			SetFiles:           c.String("set_files"),
 			Release:            c.String("release"),
 			HelmRepos:          c.StringSlice("helm_repos"),
 			Chart:              c.String("chart"),

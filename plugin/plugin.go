@@ -34,6 +34,7 @@ type (
 		Values             string   `json:"values"`
 		StringValues       string   `json:"string_values"`
 		ValuesFiles        string   `json:"values_files"`
+		SetFiles           string   `json:"set_files"`
 		Debug              bool     `json:"debug"`
 		DryRun             bool     `json:"dry_run"`
 		Secrets            []string `json:"secrets"`
@@ -108,6 +109,14 @@ func setUpgradeCommand(p *Plugin) {
 			upgrade = append(upgrade, valuesFile)
 		}
 	}
+
+	if p.Config.SetFiles != "" {
+		for _, setFiles := range strings.Split(p.Config.SetFiles, ",") {
+			upgrade = append(upgrade, "--set-file")
+			upgrade = append(upgrade, setFiles)
+		}
+	}
+
 	if p.Config.Namespace != "" {
 		upgrade = append(upgrade, "--namespace")
 		upgrade = append(upgrade, p.Config.Namespace)
@@ -138,6 +147,7 @@ func setUpgradeCommand(p *Plugin) {
 	if p.Config.Force {
 		upgrade = append(upgrade, "--force")
 	}
+
 	p.command = upgrade
 }
 
@@ -436,6 +446,7 @@ func (p *Plugin) debug() {
 	fmt.Printf("Api server: %s \n", p.Config.APIServer)
 	fmt.Printf("Values: %s \n", p.Config.Values)
 	fmt.Printf("StringValues: %s \n", p.Config.StringValues)
+	fmt.Printf("Files: %s \n", p.Config.SetFiles)
 	fmt.Printf("Secrets: %s \n", p.Config.Secrets)
 	fmt.Printf("Helm Repos: %s \n", p.Config.HelmRepos)
 	fmt.Printf("ValuesFiles: %s \n", p.Config.ValuesFiles)
