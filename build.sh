@@ -4,7 +4,7 @@ set -e
 
 export GOOS=linux
 export GOARCH=386
-# export VERSION=v2.13.1
+export VERSION=v2.16.12
 
 # go get -u github.com/golang/dep/cmd/dep
 # dep ensure

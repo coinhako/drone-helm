@@ -19,13 +19,12 @@ RUN go build
 # ------ Drone-Helm plugin image ------
 #
 FROM alpine:3.9 as final
-MAINTAINER Ivan Pedrazas <ipedrazas@gmail.com>
 
 COPY --from=builder /go/src/github.com/ipedrazas/drone-helm/drone-helm /bin/
 
 # Helm version: can be passed at build time
 ARG VERSION
-ENV VERSION ${VERSION:-v2.13.1}
+ENV VERSION ${VERSION:-v2.16.12}
 ENV FILENAME helm-${VERSION}-linux-amd64.tar.gz
 
 ARG KUBECTL
